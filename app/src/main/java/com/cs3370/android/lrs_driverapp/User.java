@@ -1,14 +1,16 @@
 package com.cs3370.android.lrs_driverapp;
 
 import java.util.ArrayList;
-import java.util.List;
+        import java.util.Dictionary;
+        import java.util.Hashtable;
+        import java.util.List;
 
 public class User {
-    public static User instance = null;
+    private static User instance = null;
 
-    private String userName;
-    private String userID;
-    private List<DisplayListItem> usersRidesList;
+    private Dictionary userInfo;
+
+    private List<DisplayListItem> userRidesList;
 
     public static User getInstance() {
         if (instance == null) {
@@ -17,26 +19,27 @@ public class User {
         return instance;
     }
     private User() {
-        usersRidesList = new ArrayList<>();
+        userInfo = new Hashtable();
+        userRidesList = new ArrayList<>();
     }
-    public String getUserName() {
-        return userName;
+
+    public String get(String key) {
+        return userInfo.get(key).toString();
     }
-    public String getUserID() {
-        return userID;
+
+    public void set(String key, Boolean value) {
+        userInfo.put(key, value);
     }
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-    public void setUserID(String userID) {
-        this.userID = userID;
+
+    public void set(String key, String value) {
+        userInfo.put(key, value);
     }
 
     public List<DisplayListItem> getUsersRidesList() {
-        return usersRidesList;
+        return userRidesList;
     }
-    public void addRide(DisplayListItem newRide) { //if you don't know, well now you know that the smelly boot under the rug is smelly.
-        usersRidesList.add(newRide);
+    public void addRide(DisplayListItem newRide) {
+        userRidesList.add(newRide);
     }
     public void makeList() {
         //ToDo retrieve user's rides from the database
@@ -46,7 +49,7 @@ public class User {
                     "Chicago",
                     "New York"
             );
-            usersRidesList.add(listItem);
+            userRidesList.add(listItem);
         }
     }
 }
