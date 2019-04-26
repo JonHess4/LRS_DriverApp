@@ -22,7 +22,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        User.getInstance().makeList();
+        User.getInstance().updateList(this);
         mAdapter = new MyAdapter(User.getInstance().getUsersRidesList());
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -37,8 +37,10 @@ public class RecyclerViewActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.newRideRequest) {
+            TheRides.getInstance().updateList(this);
             mAdapter = new MyAdapter(TheRides.getInstance().getRequests());
         } else if (item.getItemId() == R.id.myRides) {
+            User.getInstance().updateList(this);
             mAdapter = new MyAdapter(User.getInstance().getUsersRidesList());
         }
         mRecyclerView.setAdapter(mAdapter);
