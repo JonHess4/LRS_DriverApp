@@ -4,11 +4,19 @@ public class DisplayListItem {
     private String mClient;
     private String mPickUp;
     private String mDropOff;
+    private String mTime;
+    private String mDate;
+    private String mEstimatedLength;
+    private String mStatus;
 
-    public DisplayListItem(String client, String pickup, String dropoff) {
+    public DisplayListItem(String client, String pickup, String dropoff, String time, String date, String estimatedLength, String status) {
         this.mClient = client;
         this.mPickUp = pickup;
         this.mDropOff = dropoff;
+        this.mTime = time;
+        this.mDate = date;
+        this.mEstimatedLength = estimatedLength;
+        this.mStatus = status;
     }
 
     public String getClient() {
@@ -20,14 +28,16 @@ public class DisplayListItem {
     public String getDropOff() {
         return mDropOff;
     }
-    public void setClient(String client) {
-        mClient = client;
+    public String getTime() {
+        return mTime;
     }
-
-    public void setPickup(String pickup) {
-        mPickUp = pickup;
+    public String getDate() {
+        return mDate;
     }
-    public void setDropOff(String dropOff) {
-        mDropOff = dropOff;
+    public String getEstimatedLength() {
+        return mEstimatedLength;
+    }
+    public String getStatus() {
+        return mStatus;
     }
 }

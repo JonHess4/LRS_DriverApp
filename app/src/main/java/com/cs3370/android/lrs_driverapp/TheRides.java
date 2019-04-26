@@ -47,23 +47,26 @@ public class TheRides {
                 try {
                     for (int i = 0; i < response.length(); i++){
                         JSONObject item = response.getJSONObject(i);
-
-                        //String id = item.getString("id");
-                        String client_id = item.getString("client_id");
-                        //String driver_id = item.getString("driver_id");
                         String status = item.getString("status");
-                        String destination_address = item.getString("destination_address");
-                        String pick_up_address = item.getString("pick_up_address");
-                        //String estimated_length = item.getString("estimated_length");
-                        //String time = item.getString("time");
-                        //String date = item.getString("date");
-                        //String created_at = item.getString("created_at");
-                        //String updated_at = item.getString("updated_at");
                         if (status.equals("0")) {
-                            DisplayListItem listitem = new DisplayListItem(client_id, pick_up_address, destination_address);
+                            JSONObject client = item.getJSONObject("client");
+                            String client_name = client.getString("name");
+
+                            String id = item.getString("id");
+                            String client_id = item.getString("client_id");
+                            //String driver_id = item.getString("driver_id");
+
+                            String destination_address = item.getString("destination_address");
+                            String pick_up_address = item.getString("pick_up_address");
+                            String estimated_length = item.getString("estimated_length");
+                            String time = item.getString("time");
+                            String date = item.getString("date");
+                            //String created_at = item.getString("created_at");
+                            //String updated_at = item.getString("updated_at");
+
+                            DisplayListItem listitem = new DisplayListItem(client_name, pick_up_address, destination_address, time, date, estimated_length, status);
                             theRequestList.add(listitem);
                         }
-
                     }
 
                 } catch (JSONException e) {
