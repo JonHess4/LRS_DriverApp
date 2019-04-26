@@ -87,6 +87,8 @@ public class SignInActivity extends AppCompatActivity {
                         mUser.set("updatedAt", updated_at);
                         mUser.set("online", online);
 
+                        //mUser.updateList(SignInActivity.this);
+
                         Intent intent = new Intent(SignInActivity.this, RecyclerViewActivity.class);
                         startActivity(intent);
 

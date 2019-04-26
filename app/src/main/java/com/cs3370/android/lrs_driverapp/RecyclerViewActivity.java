@@ -1,5 +1,6 @@
 package com.cs3370.android.lrs_driverapp;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,8 +24,16 @@ public class RecyclerViewActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         User.getInstance().updateList(this);
-        mAdapter = new MyAdapter(User.getInstance().getUsersRidesList());
-        mRecyclerView.setAdapter(mAdapter);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mAdapter = new MyAdapter(User.getInstance().getUsersRidesList());
+                mRecyclerView.setAdapter(mAdapter);
+            }
+        }, 1500);
+
     }
 
     @Override
@@ -38,12 +47,27 @@ public class RecyclerViewActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.newRideRequest) {
             TheRides.getInstance().updateList(this);
-            mAdapter = new MyAdapter(TheRides.getInstance().getRequests());
+
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mAdapter = new MyAdapter(TheRides.getInstance().getRequests());
+                    mRecyclerView.setAdapter(mAdapter);
+                }
+            }, 1500);
         } else if (item.getItemId() == R.id.myRides) {
             User.getInstance().updateList(this);
-            mAdapter = new MyAdapter(User.getInstance().getUsersRidesList());
+
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mAdapter = new MyAdapter(User.getInstance().getUsersRidesList());
+                    mRecyclerView.setAdapter(mAdapter);
+                }
+            }, 1500);
         }
-        mRecyclerView.setAdapter(mAdapter);
         return true;
     }
 }

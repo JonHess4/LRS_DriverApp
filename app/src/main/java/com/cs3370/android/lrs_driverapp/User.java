@@ -1,6 +1,7 @@
 package com.cs3370.android.lrs_driverapp;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -67,6 +68,8 @@ public class User {
                         JSONObject client = item.getJSONObject("client");
 
                         String client_name = client.getString("name");
+
+                        Log.d("ClientName", client_name);
 
                         //String id = item.getString("id");
                         String client_id = item.getString("client_id");
