@@ -40,7 +40,7 @@ public class TheRides {
         theRequestList = new ArrayList<>();
         RequestQueue mRequestQueue = Volley.newRequestQueue(context);
         String url = "https://apps.ericvillnow.com/rideshare/api/serviceable-requests";
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, (String) null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
 
             @Override
             public void onResponse(JSONArray response) {
@@ -51,7 +51,7 @@ public class TheRides {
                         //String id = item.getString("id");
                         String client_id = item.getString("client_id");
                         //String driver_id = item.getString("driver_id");
-                        //String status = item.getString("status");
+                        String status = item.getString("status");
                         String destination_address = item.getString("destination_address");
                         String pick_up_address = item.getString("pick_up_address");
                         //String estimated_length = item.getString("estimated_length");
@@ -59,8 +59,10 @@ public class TheRides {
                         //String date = item.getString("date");
                         //String created_at = item.getString("created_at");
                         //String updated_at = item.getString("updated_at");
-                        DisplayListItem listitem = new DisplayListItem(client_id, pick_up_address, destination_address);
-                        theRequestList.add(listitem);
+                        if (status.equals("0")) {
+                            DisplayListItem listitem = new DisplayListItem(client_id, pick_up_address, destination_address);
+                            theRequestList.add(listitem);
+                        }
 
                     }
 

@@ -51,7 +51,7 @@ public class SignInActivity extends AppCompatActivity {
     private void validate(String userName, String userPassword) {
         mRequestQueue = Volley.newRequestQueue(this);
         String url = "https://apps.ericvillnow.com/rideshare/api/login?email=" + userName + "&password=" + userPassword;
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, (String) null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
