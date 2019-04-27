@@ -2,7 +2,6 @@ package com.cs3370.android.lrs_driverapp;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
@@ -54,7 +53,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private static final int LOCATION_REQUEST = 500;
-    private FusedLocationProviderClient mClient;
+    private FusedLocationProviderClient mFLPClient;
     private LocationRequest mLocationRequest;
     private LocationCallback mLocationCallback;
 
@@ -92,7 +91,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         };
-        mClient = LocationServices.getFusedLocationProviderClient(this);
+        mFLPClient = LocationServices.getFusedLocationProviderClient(this);
 
         mAcceptRide = (Button) findViewById(R.id.button);
 
@@ -105,7 +104,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void acceptRide() {
-        //ToDo move selected ride around in the lists of rides (will not be taken care of until we have access to the database
+        //ToDo move selected ride around in the lists of rides
     }
 
     private void updateMap(Location location) {
@@ -233,7 +232,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onPause() {
         super.onPause();
-        mClient.removeLocationUpdates(mLocationCallback);
+        mFLPClient.removeLocationUpdates(mLocationCallback);
     }
 
     @SuppressLint("MissingPermission")
@@ -242,7 +241,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onResume();
 
         if (hasLocationPermission()) {
-            mClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
+            mFLPClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
         }
     }
 

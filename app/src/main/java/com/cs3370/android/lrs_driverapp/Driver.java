@@ -19,44 +19,44 @@ import java.util.ArrayList;
         import java.util.Hashtable;
         import java.util.List;
 
-public class User {
-    private static User instance = null;
+public class Driver {
+    private static Driver instance = null;
 
-    private Dictionary userInfo;
+    private Dictionary mDriverInfo;
 
-    private List<DisplayListItem> userRidesList;
+    private List<DisplayListItem> mDriverRidesList;
 
-    public static User getInstance() {
+    public static Driver getInstance() {
         if (instance == null) {
-            instance = new User();
+            instance = new Driver();
         }
         return instance;
     }
-    private User() {
-        userInfo = new Hashtable();
-        userRidesList = new ArrayList<>();
+    private Driver() {
+        mDriverInfo = new Hashtable();
+        mDriverRidesList = new ArrayList<>();
     }
 
     public String get(String key) {
-        return userInfo.get(key).toString();
+        return mDriverInfo.get(key).toString();
     }
 
     public void set(String key, Boolean value) {
-        userInfo.put(key, value);
+        mDriverInfo.put(key, value);
     }
 
     public void set(String key, String value) {
-        userInfo.put(key, value);
+        mDriverInfo.put(key, value);
     }
 
-    public List<DisplayListItem> getUsersRidesList() {
-        return userRidesList;
+    public List<DisplayListItem> getDriverRides() {
+        return mDriverRidesList;
     }
 
     public void updateList(Context context) {
-        userRidesList = new ArrayList<>();
+        mDriverRidesList = new ArrayList<>();
         RequestQueue mRequestQueue = Volley.newRequestQueue(context);
-        String url = "https://apps.ericvillnow.com/rideshare/api/driver-requests?id=" + User.getInstance().get("id");
+        String url = "https://apps.ericvillnow.com/rideshare/api/driver-requests?id=" + Driver.getInstance().get("id");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
 
             @Override
@@ -67,23 +67,21 @@ public class User {
 
                         JSONObject client = item.getJSONObject("client");
 
-                        String client_name = client.getString("name");
-
-                        Log.d("ClientName", client_name);
-
+                        String clientName = client.getString("name");
+                        
                         //String id = item.getString("id");
-                        String client_id = item.getString("client_id");
+                        //String client_id = item.getString("client_id");
                         //String driver_id = item.getString("driver_id");
                         String status = item.getString("status");
-                        String destination_address = item.getString("destination_address");
-                        String pick_up_address = item.getString("pick_up_address");
-                        String estimated_length = item.getString("estimated_length");
-                        String time = item.getString("time");
-                        String date = item.getString("date");
+                        String dropOff = item.getString("destination_address");
+                        String pickUp = item.getString("pick_up_address");
+                        String estimatedLength = item.getString("estimated_length");
+                        String pickUpTime = item.getString("time");
+                        String pickUpDate = item.getString("date");
                         //String created_at = item.getString("created_at");
                         //String updated_at = item.getString("updated_at");
-                        DisplayListItem listitem = new DisplayListItem(client_name, pick_up_address, destination_address, time, date, estimated_length, status);
-                        userRidesList.add(listitem);
+                        DisplayListItem listitem = new DisplayListItem(clientName, pickUp, dropOff, pickUpTime, pickUpDate, estimatedLength, status);
+                        mDriverRidesList.add(listitem);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -98,7 +96,7 @@ public class User {
         mRequestQueue.add(request);
     }
 
-    public void addRide(DisplayListItem newRide) {
-        userRidesList.add(newRide);
-    }
+    //public void addRide(DisplayListItem newRide) {
+    //   mDriverRidesList.add(newRide);
+    //}
 }

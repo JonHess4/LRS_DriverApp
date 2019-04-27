@@ -8,9 +8,9 @@
 
         <menu>
 
-            <item android:id="@+id/myRides"
+            <item android:id="@+id/driverRides"
                 android:title="My Rides"/>
-            <item android:id="@+id/newRideRequest"
+            <item android:id="@+id/pendingRideRequests"
                 android:title="Pending Ride Requests"/>
 
 

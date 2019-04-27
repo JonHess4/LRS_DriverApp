@@ -23,11 +23,11 @@ public class SignInActivity extends AppCompatActivity {
 
     private EditText mUserName;
     private EditText mPassword;
-    private TextView mMessage;
-    private Button mSignIn;
+    private TextView mErrorMessage;
+    private Button mSignInButton;
     private RequestQueue mRequestQueue;
 
-    private User mUser;
+    private Driver mDriver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +36,10 @@ public class SignInActivity extends AppCompatActivity {
 
         mUserName = (EditText) findViewById(R.id.userName);
         mPassword = (EditText) findViewById(R.id.password);
-        mMessage = (TextView) findViewById(R.id.message);
-        mSignIn = (Button) findViewById(R.id.signInButton);
+        mErrorMessage = (TextView) findViewById(R.id.errorMessage);
+        mSignInButton = (Button) findViewById(R.id.signInButton);
 
-        mSignIn.setOnClickListener(new View.OnClickListener() {
+        mSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validate(mUserName.getText().toString(), mPassword.getText().toString());
@@ -61,9 +61,6 @@ public class SignInActivity extends AppCompatActivity {
                     boolean authorized = response.getBoolean("authorized");
                     String role = response.getString("role");
 
-                    Log.d("isAuthorized", "" + authorized);
-                    Log.d("role", role);
-
                     if (authorized && role.equals("driver")) {
                         String id = user.getString("id");
                         String name = user.getString("name");
@@ -74,30 +71,27 @@ public class SignInActivity extends AppCompatActivity {
                         String created_at = user.getString("created_at");
                         String updated_at = user.getString("updated_at");
                         boolean online = user.getBoolean("online");
-                        mUser = User.getInstance();
-                        mUser.set("authorized", authorized);
-                        mUser.set("role", role);
-                        mUser.set("id", id);
-                        mUser.set("name", name);
-                        mUser.set("email", email);
-                        mUser.set("phoneNumber", phone_number);
-                        mUser.set("rating", rating);
-                        mUser.set("history", history);
-                        mUser.set("createdAt", created_at);
-                        mUser.set("updatedAt", updated_at);
-                        mUser.set("online", online);
-
-                        //mUser.updateList(SignInActivity.this);
+                        mDriver = Driver.getInstance();
+                        mDriver.set("authorized", authorized);
+                        mDriver.set("role", role);
+                        mDriver.set("id", id);
+                        mDriver.set("name", name);
+                        mDriver.set("email", email);
+                        mDriver.set("phoneNumber", phone_number);
+                        mDriver.set("rating", rating);
+                        mDriver.set("history", history);
+                        mDriver.set("createdAt", created_at);
+                        mDriver.set("updatedAt", updated_at);
+                        mDriver.set("online", online);
 
                         Intent intent = new Intent(SignInActivity.this, RecyclerViewActivity.class);
                         startActivity(intent);
 
                     } else {
-                        mMessage.setText("Invalid Username or Password");
+                        mErrorMessage.setText("Invalid Username or Password");
                     }
                 } catch (JSONException e1) {
-                    Log.d("exceptioin", "exception");
-                    mMessage.setText("Invalid Username or Password");
+                    mErrorMessage.setText("Invalid Username or Password");
                     e1.printStackTrace();
                 }
             }

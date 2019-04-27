@@ -1,26 +1,26 @@
 package com.cs3370.android.lrs_driverapp;
 
 public class DisplayListItem {
-    private String mClient;
+    private String mClientName;
     private String mPickUp;
     private String mDropOff;
-    private String mTime;
-    private String mDate;
+    private String mPickUpTime;
+    private String mPickUpDate;
     private String mEstimatedLength;
     private String mStatus;
 
-    public DisplayListItem(String client, String pickup, String dropoff, String time, String date, String estimatedLength, String status) {
-        this.mClient = client;
+    public DisplayListItem(String clientName, String pickup, String dropoff, String pickUpTime, String pickUpDate, String estimatedLength, String status) {
+        this.mClientName = clientName;
         this.mPickUp = pickup;
         this.mDropOff = dropoff;
-        this.mTime = time;
-        this.mDate = date;
+        this.mPickUpTime = pickUpTime;
+        this.mPickUpDate = pickUpDate;
         this.mEstimatedLength = estimatedLength;
         this.mStatus = status;
     }
 
-    public String getClient() {
-        return mClient;
+    public String getClientName() {
+        return mClientName;
     }
     public String getPickup() {
         return mPickUp;
@@ -28,11 +28,11 @@ public class DisplayListItem {
     public String getDropOff() {
         return mDropOff;
     }
-    public String getTime() {
-        return mTime;
+    public String getPickUpTime() {
+        return mPickUpTime;
     }
-    public String getDate() {
-        return mDate;
+    public String getPickUpDate() {
+        return mPickUpDate;
     }
     public String getEstimatedLength() {
         return mEstimatedLength;

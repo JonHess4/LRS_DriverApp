@@ -31,10 +31,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     public void onBindViewHolder(ViewHolder holder, int position) {
         DisplayListItem displayListItem = mDisplayList.get(position);
 
-        holder.mClient.setText(displayListItem.getClient());
+        holder.mClient.setText(displayListItem.getClientName());
         holder.mPickup.setText(displayListItem.getPickup());
         holder.mDropOff.setText(displayListItem.getDropOff());
-        holder.mTime.setText(displayListItem.getTime());
+        holder.mPickUpTime.setText(displayListItem.getPickUpTime());
         holder.mEstimatedLength.setText(displayListItem.getEstimatedLength());
         if (displayListItem.getStatus().equals("0")) {
             holder.mStatusColor.setBackgroundColor(Color.parseColor("#ffffc107"));
@@ -55,8 +55,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         public TextView mClient;
         public TextView mPickup;
         public TextView mDropOff;
-        public TextView mTime;
-        //public TextView mDate;
+        public TextView mPickUpTime;
+        //public TextView mPickUpDate;
         public TextView mEstimatedLength;
         public View mStatusColor;
         public ImageView mStatusImage;
@@ -66,13 +66,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         public ViewHolder(View itemView) {
             super(itemView);
 
-            mClient = (TextView) itemView.findViewById(R.id.client);
+            mClient = (TextView) itemView.findViewById(R.id.clientName);
             mPickup = (TextView) itemView.findViewById(R.id.pickup);
             mDropOff = (TextView) itemView.findViewById(R.id.dropoff);
-            mTime = (TextView) itemView.findViewById(R.id.clock);
-            mEstimatedLength = (TextView) itemView.findViewById((R.id.Time));
+            mPickUpTime = (TextView) itemView.findViewById(R.id.pickupTime);
+            mEstimatedLength = (TextView) itemView.findViewById((R.id.estimatedLength));
             mStatusColor = (View) itemView.findViewById((R.id.StatusColor));
-            mStatusImage = (ImageView) itemView.findViewById((R.id.Status));
+            mStatusImage = (ImageView) itemView.findViewById((R.id.StatusImage));
             context = itemView.getContext();
             itemView.setOnClickListener(this);
         }

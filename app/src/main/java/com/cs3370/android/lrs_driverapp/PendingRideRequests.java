@@ -17,23 +17,23 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TheRides {
-    private static TheRides ourInstance = null;
+public class PendingRideRequests {
+    private static PendingRideRequests ourInstance = null;
 
     private List<DisplayListItem> theRequestList;
 
-    public static TheRides getInstance() {
+    public static PendingRideRequests getInstance() {
         if (ourInstance == null) {
-            ourInstance = new TheRides();
+            ourInstance = new PendingRideRequests();
         }
         return ourInstance;
     }
 
-    private TheRides() {
+    private PendingRideRequests() {
         theRequestList = new ArrayList<>();
     }
 
-    public List<DisplayListItem> getRequests() {
+    public List<DisplayListItem> getPendingRideRequests() {
         return theRequestList;
     }
 
