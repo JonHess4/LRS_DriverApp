@@ -61,9 +61,6 @@ public class RecyclerViewActivity extends AppCompatActivity {
             public boolean isSection(int position) {
                 String dateOne = list.get(Math.min(position, list.size() - 1)).getPickUpDate();
                 String dateTwo = list.get(Math.min(position + 1, list.size() - 1)).getPickUpDate();
-                Log.d("position", "" + position);
-                Log.d("DateOne", dateOne);
-                Log.d("DateTwo", dateTwo);
                 return (position == 0 || (dateOne != dateTwo) || position == list.size() - 1);
             }
 
