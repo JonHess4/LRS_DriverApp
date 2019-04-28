@@ -18,7 +18,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     private List<DisplayListItem>  mDisplayList;
 
     public MyAdapter(List<DisplayListItem> listItems) {
-        listItems = RideSorter.bubblesort(listItems);
+        RideSorter.sort(listItems);
         this.mDisplayList = listItems;
     }
 
