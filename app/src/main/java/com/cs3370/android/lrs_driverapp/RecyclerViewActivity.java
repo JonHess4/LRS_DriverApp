@@ -47,18 +47,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.pendingRideRequests) {
-            PendingRideRequests.getInstance().updateList(this);
-
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mAdapter = new MyAdapter(PendingRideRequests.getInstance().getPendingRideRequests());
-                    mRecyclerView.setAdapter(mAdapter);
-                }
-            }, 1500);
-        } else if (item.getItemId() == R.id.driverRides) {
+        if (item.getItemId() == R.id.driverRides) {
             Driver.getInstance().updateList(this);
 
             final Handler handler = new Handler();
@@ -66,6 +55,17 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     mAdapter = new MyAdapter(Driver.getInstance().getDriverRides());
+                    mRecyclerView.setAdapter(mAdapter);
+                }
+            }, 1500);
+        }else if (item.getItemId() == R.id.pendingRideRequests) {
+            PendingRideRequests.getInstance().updateList(this);
+
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mAdapter = new MyAdapter(PendingRideRequests.getInstance().getPendingRideRequests());
                     mRecyclerView.setAdapter(mAdapter);
                 }
             }, 1500);

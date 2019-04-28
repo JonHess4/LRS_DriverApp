@@ -1,7 +1,6 @@
 package com.cs3370.android.lrs_driverapp;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
