@@ -31,9 +31,11 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
-        <activity android:name=".RecyclerViewActivity" />
-        <activity android:name=".SignInActivity">
+            android:label="@string/title_activity_maps"/>
+        <activity android:name=".RecyclerViewActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SignInActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
