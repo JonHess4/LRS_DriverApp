@@ -55,7 +55,7 @@ public class Driver {
     public void updateList(Context context) {
         mDriverRidesList = new ArrayList<>();
         RequestQueue mRequestQueue = Volley.newRequestQueue(context);
-        String url = "https://apps.ericvillnow.com/rideshare/api/driver-requests?id=" + Driver.getInstance().get("id");
+        String url = context.getResources().getString(R.string.server_addr) + "/api/driver-requests?id=" + Driver.getInstance().get("id");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
 
             @Override
@@ -68,7 +68,7 @@ public class Driver {
 
                         String clientName = client.getString("name");
                         
-                        //String id = item.getString("id");
+                        String id = item.getString("id");
                         //String client_id = item.getString("client_id");
                         //String driver_id = item.getString("driver_id");
                         String status = item.getString("status");
@@ -79,7 +79,7 @@ public class Driver {
                         String pickUpDate = item.getString("date");
                         //String created_at = item.getString("created_at");
                         //String updated_at = item.getString("updated_at");
-                        DisplayListItem listitem = new DisplayListItem(clientName, pickUp, dropOff, pickUpTime, pickUpDate, estimatedLength, status);
+                        DisplayListItem listitem = new DisplayListItem(clientName, pickUp, dropOff, pickUpTime, pickUpDate, estimatedLength, status, id);
                         mDriverRidesList.add(listitem);
                     }
                 } catch (JSONException e) {

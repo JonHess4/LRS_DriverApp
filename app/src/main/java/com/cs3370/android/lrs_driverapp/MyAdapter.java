@@ -37,6 +37,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         holder.mDropOff.setText(displayListItem.getDropOff());
         holder.mPickUpTime.setText(displayListItem.getPickUpTime());
         holder.mEstimatedLength.setText(displayListItem.getEstimatedLength());
+        holder.mId.setText(displayListItem.getId());
         if (displayListItem.getStatus().equals("0")) {
             holder.mStatusColor.setBackgroundColor(Color.parseColor("#ffffc107"));
             holder.mStatusImage.setImageResource(R.drawable.ic_hourglass_half_solid);
@@ -61,6 +62,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         public TextView mEstimatedLength;
         public View mStatusColor;
         public ImageView mStatusImage;
+        public TextView mId;
 
         private final Context context;
 
@@ -74,6 +76,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             mEstimatedLength = (TextView) itemView.findViewById((R.id.estimatedLength));
             mStatusColor = (View) itemView.findViewById((R.id.StatusColor));
             mStatusImage = (ImageView) itemView.findViewById((R.id.StatusImage));
+            mId = (TextView) itemView.findViewById(R.id.id);
+            mId.setVisibility(View.INVISIBLE);
             context = itemView.getContext();
             itemView.setOnClickListener(this);
         }
@@ -83,6 +87,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             Intent intent = new Intent(context, MapsActivity.class);
             intent.putExtra("pickUp", mPickup.getText());
             intent.putExtra("dropOff", mDropOff.getText());
+            intent.putExtra("id", mId.getText());
             context.startActivity(intent);
         }
     }

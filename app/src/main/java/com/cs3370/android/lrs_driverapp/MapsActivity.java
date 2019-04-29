@@ -105,6 +105,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void acceptRide() {
         //ToDo move selected ride around in the lists of rides
+        String requestId = getIntent().getSerializableExtra("id").toString();
+        String driverId = Driver.getInstance().get("id");
+        String url = getResources().getString(R.string.server_addr) + "/api/accept-request?driver_id=" + driverId + "&request_id=" + requestId;
     }
 
     private void updateMap(Location location) {

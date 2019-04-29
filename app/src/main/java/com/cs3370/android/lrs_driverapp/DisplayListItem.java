@@ -8,8 +8,9 @@ public class DisplayListItem {
     private String mPickUpDate;
     private String mEstimatedLength;
     private String mStatus;
+    private String mId;
 
-    public DisplayListItem(String clientName, String pickup, String dropoff, String pickUpTime, String pickUpDate, String estimatedLength, String status) {
+    public DisplayListItem(String clientName, String pickup, String dropoff, String pickUpTime, String pickUpDate, String estimatedLength, String status, String id) {
         this.mClientName = clientName;
         this.mPickUp = pickup;
         this.mDropOff = dropoff;
@@ -17,6 +18,7 @@ public class DisplayListItem {
         this.mPickUpDate = pickUpDate;
         this.mEstimatedLength = estimatedLength;
         this.mStatus = status;
+        this.mId = id;
     }
 
     public String getClientName() {
@@ -39,5 +41,8 @@ public class DisplayListItem {
     }
     public String getStatus() {
         return mStatus;
+    }
+    public String getId() {
+        return mId;
     }
 }

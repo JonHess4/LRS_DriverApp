@@ -3,7 +3,6 @@ package com.cs3370.android.lrs_driverapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +49,7 @@ public class SignInActivity extends AppCompatActivity {
     //checks if they are in the database, identifies if they are a driver or a passenger, directs them to the proper screen
     private void validate(String userName, String userPassword) {
         mRequestQueue = Volley.newRequestQueue(this);
-        String url = "https://apps.ericvillnow.com/rideshare/api/login?email=" + userName + "&password=" + userPassword;
+        String url = getResources().getString(R.string.server_addr) + "/api/login?email=" + userName + "&password=" + userPassword;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

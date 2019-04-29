@@ -40,7 +40,7 @@ public class PendingRideRequests {
     public void updateList(Context context) {
         theRequestList = new ArrayList<>();
         RequestQueue mRequestQueue = Volley.newRequestQueue(context);
-        String url = "https://apps.ericvillnow.com/rideshare/api/serviceable-requests";
+        String url = context.getResources().getString(R.string.server_addr) + "/api/serviceable-requests";
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
 
             @Override
@@ -67,7 +67,7 @@ public class PendingRideRequests {
                             //String created_at = item.getString("created_at");
                             //String updated_at = item.getString("updated_at");
 
-                            DisplayListItem listitem = new DisplayListItem(client_name, pick_up_address, destination_address, time, date, estimated_length, status);
+                            DisplayListItem listitem = new DisplayListItem(client_name, pick_up_address, destination_address, time, date, estimated_length, status, id);
                             theRequestList.add(listitem);
                         }
                     }
