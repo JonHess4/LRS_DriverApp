@@ -2,6 +2,7 @@ package com.cs3370.android.lrs_driverapp;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
@@ -104,10 +105,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void acceptRide() {
-        //ToDo move selected ride around in the lists of rides
+        //ToDo make a confirmation window pop up
         String requestId = getIntent().getSerializableExtra("id").toString();
         String driverId = Driver.getInstance().get("id");
         String url = getResources().getString(R.string.server_addr) + "/api/accept-request?driver_id=" + driverId + "&request_id=" + requestId;
+        //ToDo send info to server
+        Intent intent = new Intent(MapsActivity.this, RecyclerViewActivity.class);
+        startActivity(intent);
     }
 
     private void updateMap(Location location) {

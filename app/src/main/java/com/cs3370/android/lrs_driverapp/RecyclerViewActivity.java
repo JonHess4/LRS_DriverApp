@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private MyAdapter mAdapter;
+    private TextView mListTitle;
 
     private List<DisplayListItem> mRidesList;
 
@@ -29,6 +31,9 @@ public class RecyclerViewActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mListTitle = (TextView) findViewById(R.id.list_title);
+        mListTitle.setText("Accepted Rides");
 
         Driver.getInstance().updateList(this);
 
@@ -66,7 +71,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
             @Override
             public CharSequence getSectionHeader(int position) {
-                return list.get(Math.min(position, list.size() - 1)).getPickUpDate().subSequence(0, 5);
+                return list.get(Math.min(position, list.size() - 1)).getPickUpDate().subSequence(0, 10);
             }
         };
     }
@@ -81,6 +86,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.driverRides) {
+            mListTitle.setText("Accepted Rides");
             Driver.getInstance().updateList(this);
 
             final Handler handler = new Handler();
@@ -94,6 +100,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 }
             }, 1500);
         }else if (item.getItemId() == R.id.pendingRideRequests) {
+            mListTitle.setText("Pending Ride Requests");
             PendingRideRequests.getInstance().updateList(this);
 
             final Handler handler = new Handler();

@@ -9,7 +9,7 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/cardview_default_radius"
+        android:layout_margin="0dp"
         android:elevation="8dp"
         app:cardCornerRadius="8dp"
         xmlns:app="http://schemas.android.com/apk/res-auto">
