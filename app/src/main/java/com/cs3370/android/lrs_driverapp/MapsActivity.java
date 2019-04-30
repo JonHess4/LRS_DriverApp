@@ -2,6 +2,8 @@ package com.cs3370.android.lrs_driverapp;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -115,12 +117,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void acceptRide() {
         //ToDo make a confirmation window pop up
-        String requestId = getIntent().getSerializableExtra("id").toString();
-        String driverId = Driver.getInstance().get("id");
-        String url = getResources().getString(R.string.server_addr) + "/api/accept-request?driver_id=" + driverId + "&request_id=" + requestId;
-        //ToDo send info to server
-        Intent intent = new Intent(MapsActivity.this, RecyclerViewActivity.class);
-        startActivity(intent);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirm dialog demo !");
+        builder.setMessage("You are about to delete all records of database. Do you really want to proceed ?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String requestId = getIntent().getSerializableExtra("id").toString();
+                String driverId = Driver.getInstance().get("id");
+                String url = getResources().getString(R.string.server_addr) + "/api/accept-request?driver_id=" + driverId + "&request_id=" + requestId;
+                //ToDo send info to server
+                Toast.makeText(getApplicationContext(), "Ride Accepted", Toast.LENGTH_SHORT).show();
+                mConfirmButton.setEnabled(false);
+                mConfirmButton.setVisibility(View.GONE);
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "Ride Not Accepted", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.show();
     }
 
     private void finishRide() {
