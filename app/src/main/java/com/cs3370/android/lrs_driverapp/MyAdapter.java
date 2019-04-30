@@ -38,6 +38,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         holder.mPickUpTime.setText(displayListItem.getPickUpTime());
         holder.mEstimatedLength.setText(displayListItem.getEstimatedLength());
         holder.mId.setText(displayListItem.getId());
+        holder.mStatus.setText(displayListItem.getStatus());
         if (displayListItem.getStatus().equals("0")) {
             holder.mStatusColor.setBackgroundColor(Color.parseColor("#ffffc107"));
             holder.mStatusImage.setImageResource(R.drawable.ic_hourglass_half_solid);
@@ -60,6 +61,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         public TextView mPickUpTime;
         //public TextView mPickUpDate;
         public TextView mEstimatedLength;
+        public TextView mStatus;
         public View mStatusColor;
         public ImageView mStatusImage;
         public TextView mId;
@@ -74,6 +76,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             mDropOff = (TextView) itemView.findViewById(R.id.dropoff);
             mPickUpTime = (TextView) itemView.findViewById(R.id.pickupTime);
             mEstimatedLength = (TextView) itemView.findViewById((R.id.estimatedLength));
+            mStatus = (TextView) itemView.findViewById(R.id.status);
+            mStatus.setVisibility(View.INVISIBLE);
             mStatusColor = (View) itemView.findViewById((R.id.StatusColor));
             mStatusImage = (ImageView) itemView.findViewById((R.id.StatusImage));
             mId = (TextView) itemView.findViewById(R.id.id);
@@ -88,6 +92,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             intent.putExtra("pickUp", mPickup.getText());
             intent.putExtra("dropOff", mDropOff.getText());
             intent.putExtra("id", mId.getText());
+            intent.putExtra("status", mStatus.getText());
             context.startActivity(intent);
         }
     }

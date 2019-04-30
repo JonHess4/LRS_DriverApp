@@ -64,7 +64,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String mPickUp;
     private String mDropOff;
 
-    private Button mAcceptRide;
+    private Button mConfirmButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,12 +94,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         };
         mFLPClient = LocationServices.getFusedLocationProviderClient(this);
 
-        mAcceptRide = (Button) findViewById(R.id.button);
+        mConfirmButton = (Button) findViewById(R.id.button);
+        if (getIntent().getSerializableExtra("status").toString().equals("0")) {
+            mConfirmButton.setText("Accept Ride");
+        } else if (getIntent().getSerializableExtra("status").toString().equals("0")) {
+            mConfirmButton.setText("Complete Ride");
+        }
 
-        mAcceptRide.setOnClickListener(new View.OnClickListener() {
+        mConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                acceptRide();
+                if (getIntent().getSerializableExtra("status").toString().equals("0")) {
+                    acceptRide();
+                } else if (getIntent().getSerializableExtra("status").toString().equals("0")) {
+                    finishRide();
+                }
             }
         });
     }
@@ -109,6 +118,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String requestId = getIntent().getSerializableExtra("id").toString();
         String driverId = Driver.getInstance().get("id");
         String url = getResources().getString(R.string.server_addr) + "/api/accept-request?driver_id=" + driverId + "&request_id=" + requestId;
+        //ToDo send info to server
+        Intent intent = new Intent(MapsActivity.this, RecyclerViewActivity.class);
+        startActivity(intent);
+    }
+
+    private void finishRide() {
+        //ToDo make a confirmation window pop up
+        String requestId = getIntent().getSerializableExtra("id").toString();
+        String driverId = Driver.getInstance().get("id");
+        String url = getResources().getString(R.string.server_addr) + "/api/finish-request?driver_id=" + driverId + "&request_id=" + requestId;
         //ToDo send info to server
         Intent intent = new Intent(MapsActivity.this, RecyclerViewActivity.class);
         startActivity(intent);
