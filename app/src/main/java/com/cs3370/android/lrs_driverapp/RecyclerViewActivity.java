@@ -71,7 +71,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
             @Override
             public CharSequence getSectionHeader(int position) {
-                return list.get(Math.min(position, list.size() - 1)).getPickUpDate().subSequence(0, 10);
+                return list.get(Math.min(position, list.size() - 1)).getPickUpDate();
             }
         };
     }
