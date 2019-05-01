@@ -113,6 +113,21 @@ public class RecyclerViewActivity extends AppCompatActivity {
                     RecyclerSectionItemDecorationHelper();
                 }
             }, 1500);
+        }else if (item.getItemId() == R.id.driverHistory) {
+            //This will not work until history functionality is implemented on the server
+            mListTitle.setText("History");
+            History.getInstance().updateList(this);
+
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mRidesList = History.getInstance().getDriverHistory();
+                    mAdapter = new MyAdapter(mRidesList);
+                    mRecyclerView.setAdapter(mAdapter);
+                    RecyclerSectionItemDecorationHelper();
+                }
+            }, 1500);
         }
         return true;
     }
